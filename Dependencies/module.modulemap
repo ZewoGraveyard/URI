@@ -1,0 +1,4 @@
+module Itsari [system] {
+    header "Itsari/itsari_swift.h"
+    export *
+}
