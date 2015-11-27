@@ -10,7 +10,13 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.9'
 
-  s.source_files = 'URI/**/*.swift'
+  s.source_files = 'Dependencies/Itsari/*.c', 'URI/**/*.swift'
+
+  s.xcconfig =  {
+    'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/URI/Dependencies'
+  }
+
+  s.preserve_paths = 'Dependencies/*'
 
   s.requires_arc = true
 end
