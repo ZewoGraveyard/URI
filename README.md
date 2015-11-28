@@ -54,7 +54,7 @@ use_frameworks!
 
 pod 'URI', '0.1'
 ```
-> The `source 'https://github.com/Zewo/Specs.git'` part is very important. Don't forget it.
+> Don't forget  `source 'https://github.com/Zewo/Specs.git'`. This is very important. It should always come before the official CocoaPods repo.
 
 Then, run the following command:
 
