@@ -86,7 +86,7 @@ extension String {
         self.init(string)
     }
 
-    var data: [Int8] {
+    public var data: [Int8] {
         return self.utf8.map { Int8($0) }
     }
 

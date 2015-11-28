@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B0D521791BE4F753002063D5"
-               BuildableName = "URI.xctest"
+               BuildableName = "URITests.xctest"
                BlueprintName = "URI OSX Tests"
                ReferencedContainer = "container:URI.xcodeproj">
             </BuildableReference>
