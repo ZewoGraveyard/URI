@@ -48,7 +48,7 @@
 
 /* Begin PBXFileReference section */
 		3A1C55891BECE19A006EC3F7 /* URI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A1C55921BECE19A006EC3F7 /* URI.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URI.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A1C55921BECE19A006EC3F7 /* URITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B019A66A1C09097400EADB02 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		B019A6761C090B3B00EADB02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B019A67D1C090B3B00EADB02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 		B019A6901C0917F600EADB02 /* itsari_swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itsari_swift.h; sourceTree = "<group>"; };
 		B019A6991C09181400EADB02 /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
 		B0D521701BE4F753002063D5 /* URI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0D5217A1BE4F753002063D5 /* URI.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URI.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0D5217A1BE4F753002063D5 /* URITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,9 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				B0D521701BE4F753002063D5 /* URI.framework */,
-				B0D5217A1BE4F753002063D5 /* URI.xctest */,
+				B0D5217A1BE4F753002063D5 /* URITests.xctest */,
 				3A1C55891BECE19A006EC3F7 /* URI.framework */,
-				3A1C55921BECE19A006EC3F7 /* URI.xctest */,
+				3A1C55921BECE19A006EC3F7 /* URITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,7 +218,7 @@
 			);
 			name = "URI iOS Tests";
 			productName = "Aeon iOSTests";
-			productReference = 3A1C55921BECE19A006EC3F7 /* URI.xctest */;
+			productReference = 3A1C55921BECE19A006EC3F7 /* URITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		B0D5216F1BE4F753002063D5 /* URI OSX */ = {
@@ -254,7 +254,7 @@
 			);
 			name = "URI OSX Tests";
 			productName = AeonTests;
-			productReference = B0D5217A1BE4F753002063D5 /* URI.xctest */;
+			productReference = B0D5217A1BE4F753002063D5 /* URITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
