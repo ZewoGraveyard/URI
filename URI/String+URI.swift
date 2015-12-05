@@ -64,8 +64,9 @@ extension String {
     public init?(data: [Int8]) {
         if let string = String.fromCString(data + [0]) {
             self.init(string)
+        } else {
+            return nil
         }
-        return nil
     }
 
     public init?(data: [UInt8]) {
