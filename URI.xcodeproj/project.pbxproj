@@ -8,24 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A1C55931BECE19B006EC3F7 /* URI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1C55891BECE19A006EC3F7 /* URI.framework */; };
-		B019A6811C090B5400EADB02 /* URITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A67E1C090B3B00EADB02 /* URITests.swift */; };
-		B019A6821C090B5400EADB02 /* URITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A67E1C090B3B00EADB02 /* URITests.swift */; };
-		B019A6841C09170300EADB02 /* String+URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A6831C09170300EADB02 /* String+URI.swift */; };
-		B019A6851C09170300EADB02 /* String+URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A6831C09170300EADB02 /* String+URI.swift */; };
-		B019A6871C09175100EADB02 /* Int+URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A6861C09175100EADB02 /* Int+URI.swift */; };
-		B019A6881C09175100EADB02 /* Int+URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A6861C09175100EADB02 /* Int+URI.swift */; };
-		B019A68A1C09176C00EADB02 /* CollectionType+URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A6891C09176C00EADB02 /* CollectionType+URI.swift */; };
-		B019A68B1C09176C00EADB02 /* CollectionType+URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A6891C09176C00EADB02 /* CollectionType+URI.swift */; };
-		B019A6911C0917F600EADB02 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B019A68D1C0917F600EADB02 /* http_parser.c */; };
-		B019A6921C0917F600EADB02 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = B019A68D1C0917F600EADB02 /* http_parser.c */; };
-		B019A6931C0917F600EADB02 /* http_parser.h in Headers */ = {isa = PBXBuildFile; fileRef = B019A68E1C0917F600EADB02 /* http_parser.h */; };
-		B019A6941C0917F600EADB02 /* http_parser.h in Headers */ = {isa = PBXBuildFile; fileRef = B019A68E1C0917F600EADB02 /* http_parser.h */; };
-		B019A6951C0917F600EADB02 /* itsari_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B019A68F1C0917F600EADB02 /* itsari_swift.c */; };
-		B019A6961C0917F600EADB02 /* itsari_swift.c in Sources */ = {isa = PBXBuildFile; fileRef = B019A68F1C0917F600EADB02 /* itsari_swift.c */; };
-		B019A6971C0917F600EADB02 /* itsari_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = B019A6901C0917F600EADB02 /* itsari_swift.h */; };
-		B019A6981C0917F600EADB02 /* itsari_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = B019A6901C0917F600EADB02 /* itsari_swift.h */; };
-		B019A69A1C09181400EADB02 /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A6991C09181400EADB02 /* URI.swift */; };
-		B019A69B1C09181400EADB02 /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019A6991C09181400EADB02 /* URI.swift */; };
 		B0D5217B1BE4F753002063D5 /* URI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D521701BE4F753002063D5 /* URI.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,21 +30,14 @@
 
 /* Begin PBXFileReference section */
 		3A1C55891BECE19A006EC3F7 /* URI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A1C55921BECE19A006EC3F7 /* URI.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URI.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B019A66A1C09097400EADB02 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		B019A6761C090B3B00EADB02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B019A67D1C090B3B00EADB02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B019A67E1C090B3B00EADB02 /* URITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URITests.swift; sourceTree = "<group>"; };
-		B019A6831C09170300EADB02 /* String+URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+URI.swift"; sourceTree = "<group>"; };
-		B019A6861C09175100EADB02 /* Int+URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+URI.swift"; sourceTree = "<group>"; };
-		B019A6891C09176C00EADB02 /* CollectionType+URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+URI.swift"; sourceTree = "<group>"; };
-		B019A68D1C0917F600EADB02 /* http_parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_parser.c; sourceTree = "<group>"; };
-		B019A68E1C0917F600EADB02 /* http_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_parser.h; sourceTree = "<group>"; };
-		B019A68F1C0917F600EADB02 /* itsari_swift.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = itsari_swift.c; sourceTree = "<group>"; };
-		B019A6901C0917F600EADB02 /* itsari_swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itsari_swift.h; sourceTree = "<group>"; };
-		B019A6991C09181400EADB02 /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
+		3A1C55921BECE19A006EC3F7 /* URI.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = URI.xctest; path = URITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D521701BE4F753002063D5 /* URI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = URI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0D5217A1BE4F753002063D5 /* URI.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URI.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0D5217A1BE4F753002063D5 /* URI.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = URI.xctest; path = URITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0FF17D71C14759200063F30 /* CollectionType+URI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionType+URI.swift"; sourceTree = "<group>"; };
+		B0FF17D91C14759200063F30 /* Int+URI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+URI.swift"; sourceTree = "<group>"; };
+		B0FF17DA1C14759200063F30 /* String+URI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URI.swift"; sourceTree = "<group>"; };
+		B0FF17DB1C14759200063F30 /* URI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
+		B0FF17DE1C14759200063F30 /* URITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,53 +74,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B019A6641C09097400EADB02 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				B019A68C1C0917F600EADB02 /* Itsari */,
-				B019A66A1C09097400EADB02 /* module.modulemap */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
-		B019A6731C090B3B00EADB02 /* URI */ = {
-			isa = PBXGroup;
-			children = (
-				B019A6761C090B3B00EADB02 /* Info.plist */,
-				B019A6991C09181400EADB02 /* URI.swift */,
-				B019A6831C09170300EADB02 /* String+URI.swift */,
-				B019A6861C09175100EADB02 /* Int+URI.swift */,
-				B019A6891C09176C00EADB02 /* CollectionType+URI.swift */,
-			);
-			path = URI;
-			sourceTree = "<group>";
-		};
-		B019A67C1C090B3B00EADB02 /* URI Tests */ = {
-			isa = PBXGroup;
-			children = (
-				B019A67D1C090B3B00EADB02 /* Info.plist */,
-				B019A67E1C090B3B00EADB02 /* URITests.swift */,
-			);
-			path = "URI Tests";
-			sourceTree = "<group>";
-		};
-		B019A68C1C0917F600EADB02 /* Itsari */ = {
-			isa = PBXGroup;
-			children = (
-				B019A68D1C0917F600EADB02 /* http_parser.c */,
-				B019A68E1C0917F600EADB02 /* http_parser.h */,
-				B019A68F1C0917F600EADB02 /* itsari_swift.c */,
-				B019A6901C0917F600EADB02 /* itsari_swift.h */,
-			);
-			path = Itsari;
-			sourceTree = "<group>";
-		};
 		B0D521661BE4F753002063D5 = {
 			isa = PBXGroup;
 			children = (
-				B019A6641C09097400EADB02 /* Dependencies */,
-				B019A6731C090B3B00EADB02 /* URI */,
-				B019A67C1C090B3B00EADB02 /* URI Tests */,
+				B0FF17D61C14759200063F30 /* Sources */,
+				B0FF17DC1C14759200063F30 /* Tests */,
 				B0D521711BE4F753002063D5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -161,6 +94,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B0FF17D61C14759200063F30 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B0FF17D71C14759200063F30 /* CollectionType+URI.swift */,
+				B0FF17D91C14759200063F30 /* Int+URI.swift */,
+				B0FF17DA1C14759200063F30 /* String+URI.swift */,
+				B0FF17DB1C14759200063F30 /* URI.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		B0FF17DC1C14759200063F30 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B0FF17DE1C14759200063F30 /* URITests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -168,8 +120,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B019A6981C0917F600EADB02 /* itsari_swift.h in Headers */,
-				B019A6941C0917F600EADB02 /* http_parser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,8 +127,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B019A6971C0917F600EADB02 /* itsari_swift.h in Headers */,
-				B019A6931C0917F600EADB02 /* http_parser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,12 +285,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B019A6851C09170300EADB02 /* String+URI.swift in Sources */,
-				B019A6881C09175100EADB02 /* Int+URI.swift in Sources */,
-				B019A69B1C09181400EADB02 /* URI.swift in Sources */,
-				B019A6921C0917F600EADB02 /* http_parser.c in Sources */,
-				B019A68B1C09176C00EADB02 /* CollectionType+URI.swift in Sources */,
-				B019A6961C0917F600EADB02 /* itsari_swift.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,7 +292,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B019A6821C090B5400EADB02 /* URITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,12 +299,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B019A6841C09170300EADB02 /* String+URI.swift in Sources */,
-				B019A6871C09175100EADB02 /* Int+URI.swift in Sources */,
-				B019A69A1C09181400EADB02 /* URI.swift in Sources */,
-				B019A6911C0917F600EADB02 /* http_parser.c in Sources */,
-				B019A68A1C09176C00EADB02 /* CollectionType+URI.swift in Sources */,
-				B019A6951C0917F600EADB02 /* itsari_swift.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +306,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B019A6811C090B5400EADB02 /* URITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

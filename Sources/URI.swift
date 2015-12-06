@@ -22,7 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Itsari
+import CURIParser
 
 public struct URI {
     public struct UserInfo: Hashable, CustomStringConvertible {
