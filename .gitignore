@@ -10,6 +10,7 @@
 build/
 DerivedData
 Carthage/
+Packages/
 
 ## Various settings
 *.pbxuser
