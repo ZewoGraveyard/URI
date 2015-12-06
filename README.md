@@ -6,7 +6,7 @@ URI
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://tldrlegal.com/license/mit-license)
 [![Slack Status](https://zewo-slackin.herokuapp.com/badge.svg)](https://zewo-slackin.herokuapp.com)
 
-**URI** ([RFC 3986](https://tools.ietf.org/html/rfc3986)) for **Swift 2**.
+**URI** ([RFC 3986](https://tools.ietf.org/html/rfc3986)) for **Swift 2.2**.
 
 ## Usage
 
@@ -30,7 +30,7 @@ uri.query["done"] // "true"
 
 ## Installation
 
-- Install `uri_parser`
+- Install [`uri_parser`](https://github.com/Zewo/uri_parser)
 
 ```bash
 $ git clone https://github.com/Zewo/uri_parser.git
