@@ -41,4 +41,10 @@ class URITests: XCTestCase {
         XCTAssert(uri2.path == "/api/v1/tasks")
         XCTAssert(uri2.query["done"] == "true")
     }
+
+    func testStringDataEncoding() {
+        let string = String(UnicodeScalar(255)) // ÿ
+        let stringBytes: [UInt8] = [0xC3, 0xBF]
+        XCTAssertEqual(string.data, stringBytes.map { Int8(bitPattern: $0) })
+    }
 }
