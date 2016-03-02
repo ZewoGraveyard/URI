@@ -64,7 +64,7 @@ public struct URI {
 }
 
 extension URI {
-    public init(string: String) throws {
+    public init(_ string: String) throws {
         let u = parse_uri(string)
 
         if u.field_set & 1 != 0 {
