@@ -117,7 +117,7 @@ extension URI {
     }
 
     @inline(__always) private static func getSubstring(string: String, start: UInt16, end: UInt16) -> String {
-        return string[string.startIndex.advancedBy(Int(start)) ..< string.startIndex.advancedBy(Int(end))]
+        return string[string.startIndex.advanced(by: Int(start)) ..< string.startIndex.advanced(by: Int(end))]
     }
 
     @inline(__always) private static func parseUserInfoString(userInfoString: String) -> URI.UserInfo? {
@@ -185,7 +185,7 @@ extension URI: CustomStringConvertible {
             string += "?"
         }
 
-        for (index, (name, value)) in query.enumerate() {
+        for (offset: index, element: (key: name, value: value)) in query.enumerated() {
             string += "\(name)=\(value)"
             if index != query.values.count - 1 {
                 string += "&"
