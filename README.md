@@ -28,29 +28,7 @@ uri.path // "/api/v1/tasks"
 uri.query["done"] // "true"
 ```
 
-## Installation
-
-- Install [`uri_parser`](https://github.com/Zewo/uri_parser)
-
-### Homebrew
-```bash
-$ brew tap zewo/tap
-$ brew install uri_parser
-```
-
-### Ubuntu/Debian
-```bash
-$ echo "deb [trusted=yes] http://apt.zewo.io/deb ./" | sudo tee --append /etc/apt/sources.list
-$ sudo apt-get update
-$ sudo apt-get install uri_parser
-```
-
-### Source
-```bash
-$ git clone https://github.com/Zewo/uri_parser.git && cd uri_parser
-$ make
-$ (sudo) make install
-```
+## Package
 
 - Add `URI` to your `Package.swift`
 
