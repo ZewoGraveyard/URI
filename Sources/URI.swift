@@ -24,35 +24,20 @@
 
 import CURIParser
 @_exported import String
+@_exported import C7
 
-public struct URI {
-    public struct UserInfo: Hashable, CustomStringConvertible {
-        public var username: String
-        public var password: String
-
-        public init(username: String, password: String) {
-            self.username = username
-            self.password = password
-        }
-
-        public var hashValue: Int {
-            return description.hashValue
-        }
-
-        public var description: String {
-            return "\(username):\(password)"
-        }
+extension URI.UserInfo: Hashable, CustomStringConvertible {
+    public var hashValue: Int {
+        return description.hashValue
     }
 
-    public var scheme: String?
-    public var userInfo: UserInfo?
-    public var host: String?
-    public var port: Int?
-    public var path: String?
-    public var query: [String: String]
-    public var fragment: String?
+    public var description: String {
+        return "\(username):\(password)"
+    }
+}
 
-    public init(scheme: String? = nil, userInfo: UserInfo? = nil, host: String? = nil, port: Int? = nil, path: String? = nil, query: [String: String] = [:], fragment: String? = nil) {
+extension URI {
+    public init(scheme: String? = nil, userInfo: UserInfo? = nil, host: String? = nil, port: Int? = nil, path: String? = nil, query: [Query] = [], fragment: String? = nil) {
         self.scheme = scheme
         self.userInfo = userInfo
         self.host = host
@@ -98,7 +83,7 @@ extension URI {
             let queryString = URI.getSubstring(string, start: u.query_start, end: u.query_end)
             query = URI.parseQueryString(queryString)
         } else {
-            query = [:]
+            query = []
         }
 
         if u.field_set & 32 != 0 {
@@ -136,24 +121,26 @@ extension URI {
         return nil
     }
 
-    @inline(__always) private static func parseQueryString(queryString: String) -> [String: String] {
-        var query: [String: String] = [:]
+    @inline(__always) private static func parseQueryString(queryString: String) -> [Query] {
+        var queries: [Query] = []
         let queryTuples = queryString.split("&")
         for tuple in queryTuples {
             let queryElements = tuple.split("=")
             if queryElements.count == 1 {
-                if let name = try? String(percentEncoded: queryElements[0]) {
-                    query[name] = ""
+                if let key = try? String(percentEncoded: queryElements[0]) {
+                    let queryElement = Query(key: key)
+                    queries.append(queryElement)
                 }
             } else if queryElements.count == 2 {
                 if let
-                    name = try? String(percentEncoded: queryElements[0]),
+                    key = try? String(percentEncoded: queryElements[0]),
                     value = try? String(percentEncoded: queryElements[1]) {
-                        query[name] = value
+                        let queryElement = Query(key: key, value: value)
+                        queries.append(queryElement)
                 }
             }
         }
-        return query
+        return queries
     }
 }
 
@@ -185,9 +172,9 @@ extension URI: CustomStringConvertible {
             string += "?"
         }
 
-        for (offset: index, element: (key: name, value: value)) in query.enumerated() {
-            string += "\(name)=\(value)"
-            if index != query.values.count - 1 {
+        for (offset: index, element: queryElement) in query.enumerated() {
+            string += "\(queryElement.key)=\(queryElement.value)"
+            if index != query.count - 1 {
                 string += "&"
             }
         }
