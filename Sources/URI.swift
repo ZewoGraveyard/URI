@@ -37,18 +37,6 @@ extension URI.UserInfo: Hashable, CustomStringConvertible {
 }
 
 extension URI {
-    public init(scheme: String? = nil, userInfo: UserInfo? = nil, host: String? = nil, port: Int? = nil, path: String? = nil, query: [Query] = [], fragment: String? = nil) {
-        self.scheme = scheme
-        self.userInfo = userInfo
-        self.host = host
-        self.port = port
-        self.path = path
-        self.query = query
-        self.fragment = fragment
-    }
-}
-
-extension URI {
     public init(_ string: String) throws {
         let u = parse_uri(string)
 
