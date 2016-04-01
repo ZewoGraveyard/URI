@@ -161,7 +161,7 @@ extension URI: CustomStringConvertible {
         }
 
         for (offset: index, element: queryElement) in query.enumerated() {
-            string += "\(queryElement.key)=\(queryElement.value)"
+            string += "\(queryElement.key)=\(queryElement.value ?? "")"
             if index != query.count - 1 {
                 string += "&"
             }
