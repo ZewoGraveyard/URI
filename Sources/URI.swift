@@ -116,7 +116,7 @@ extension URI {
             let queryElements = tuple.split("=")
             if queryElements.count == 1 {
                 if let key = try? String(percentEncoded: queryElements[0]) {
-                    queries[key] = QueryField(nil)
+                    queries[key] = QueryField([])
                 }
             } else if queryElements.count == 2 {
                 if let
