@@ -71,7 +71,7 @@ extension URI {
             let queryString = URI.getSubstring(string, start: u.query_start, end: u.query_end)
             query = URI.parseQueryString(queryString)
         } else {
-            query = []
+            query = [:]
         }
 
         if u.field_set & 32 != 0 {
@@ -109,22 +109,20 @@ extension URI {
         return nil
     }
 
-    @inline(__always) private static func parseQueryString(queryString: String) -> [Query] {
-        var queries: [Query] = []
+    @inline(__always) private static func parseQueryString(queryString: String) -> Query {
+        var queries: Query = [:]
         let queryTuples = queryString.split("&")
         for tuple in queryTuples {
             let queryElements = tuple.split("=")
             if queryElements.count == 1 {
                 if let key = try? String(percentEncoded: queryElements[0]) {
-                    let queryElement = Query(key: key)
-                    queries.append(queryElement)
+                    queries[key] = QueryField([])
                 }
             } else if queryElements.count == 2 {
                 if let
                     key = try? String(percentEncoded: queryElements[0]),
                     value = try? String(percentEncoded: queryElements[1]) {
-                        let queryElement = Query(key: key, value: value)
-                        queries.append(queryElement)
+                        queries[key] = QueryField(value)
                 }
             }
         }
@@ -162,7 +160,7 @@ extension URI: CustomStringConvertible {
 
         for (offset: index, element: queryElement) in query.enumerated() {
             string += "\(queryElement.key)"
-            if let value = queryElement.value {
+            if let value = query[queryElement.key].values[0] {
                 string += "=\(value)"
             }
             if index != query.count - 1 {
