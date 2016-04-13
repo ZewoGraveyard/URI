@@ -40,14 +40,13 @@ extension URI {
     public init(_ string: String) throws {
         let u = parse_uri(string)
 
+        if u.error == 1 {
+            throw URIParseError.invalidURI
+        }
+        
         if u.field_set & 1 != 0 {
-            if URI.getSubstring(string, start: u.scheme_end, end: u.scheme_end + 1) == ":" {
-                let string = URI.getSubstring(string, start: u.scheme_start, end: u.scheme_end)
-                scheme = try String(percentEncoded: string)
-            }
-            else {
-                scheme = nil
-            }
+            let string = URI.getSubstring(string, start: u.scheme_start, end: u.scheme_end)
+            scheme = try String(percentEncoded: string)
         } else {
             scheme = nil
         }
