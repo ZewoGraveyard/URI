@@ -41,8 +41,13 @@ extension URI {
         let u = parse_uri(string)
 
         if u.field_set & 1 != 0 {
-            let string = URI.getSubstring(string, start: u.scheme_start, end: u.scheme_end)
-            scheme = try String(percentEncoded: string)
+            if URI.getSubstring(string, start: u.scheme_end, end: u.scheme_end + 1) == ":" {
+                let string = URI.getSubstring(string, start: u.scheme_start, end: u.scheme_end)
+                scheme = try String(percentEncoded: string)
+            }
+            else {
+                scheme = nil
+            }
         } else {
             scheme = nil
         }
@@ -86,6 +91,10 @@ extension URI {
             userInfo = URI.parseUserInfoString(userInfoString)
         } else {
             userInfo = nil
+        }
+        
+        if scheme == nil && host == nil && port == nil && path == nil && query.count == 0 && fragment == nil && userInfo == nil {
+            throw URIParseError.invalidURI
         }
     }
 
@@ -188,4 +197,9 @@ public func ==(lhs: URI, rhs: URI) -> Bool {
 
 public func ==(lhs: URI.UserInfo, rhs: URI.UserInfo) -> Bool {
     return lhs.hashValue == rhs.hashValue
+}
+
+
+public enum URIParseError : ErrorProtocol {
+    case invalidURI
 }
