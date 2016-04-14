@@ -102,7 +102,7 @@ extension URI {
     }
 
     @inline(__always) private static func parse(userInfoString: String) -> URI.UserInfo? {
-        let userInfoElements = userInfoString.split(by: ":")
+        let userInfoElements = userInfoString.split(separator: ":")
         if userInfoElements.count == 2 {
             if let
                 username = try? String(percentEncoded: userInfoElements[0]),
@@ -119,9 +119,9 @@ extension URI {
 
     @inline(__always) private static func parse(queryString: String) -> Query {
         var queries: Query = [:]
-        let queryTuples = queryString.split(by: "&")
+        let queryTuples = queryString.split(separator: "&")
         for tuple in queryTuples {
-            let queryElements = tuple.split(by: "=")
+            let queryElements = tuple.split(separator: "=")
             if queryElements.count == 1 {
                 if let key = try? String(percentEncoded: queryElements[0]) {
                     queries[key] = QueryField([])
