@@ -26,6 +26,10 @@ import CURIParser
 @_exported import String
 @_exported import C7
 
+public enum URIParseError : ErrorProtocol {
+    case invalidURI
+}
+
 extension URI.UserInfo: Hashable, CustomStringConvertible {
     public var hashValue: Int {
         return description.hashValue
@@ -196,9 +200,4 @@ public func ==(lhs: URI, rhs: URI) -> Bool {
 
 public func ==(lhs: URI.UserInfo, rhs: URI.UserInfo) -> Bool {
     return lhs.hashValue == rhs.hashValue
-}
-
-
-public enum URIParseError : ErrorProtocol {
-    case invalidURI
 }
