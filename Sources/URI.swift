@@ -26,6 +26,10 @@ import CURIParser
 @_exported import String
 @_exported import C7
 
+public enum URIParseError : ErrorProtocol {
+    case invalidURI
+}
+
 extension URI.UserInfo: Hashable, CustomStringConvertible {
     public var hashValue: Int {
         return description.hashValue
@@ -73,7 +77,7 @@ extension URI {
 
         if u.field_set & 16 != 0 {
             let queryString = URI.getSubstring(string, start: u.query_start, end: u.query_end)
-            query = URI.parseQueryString(queryString)
+            query = URI.parse(queryString: queryString)
         } else {
             query = [:]
         }
@@ -87,7 +91,7 @@ extension URI {
 
         if u.field_set & 64 != 0 {
             let userInfoString = URI.getSubstring(string, start: u.user_info_start, end: u.user_info_end)
-            userInfo = URI.parseUserInfoString(userInfoString)
+            userInfo = URI.parse(userInfoString: userInfoString)
         } else {
             userInfo = nil
         }
@@ -97,12 +101,12 @@ extension URI {
         }
     }
 
-    @inline(__always) private static func getSubstring(string: String, start: UInt16, end: UInt16) -> String {
+    @inline(__always) private static func getSubstring(_ string: String, start: UInt16, end: UInt16) -> String {
         return string[string.startIndex.advanced(by: Int(start)) ..< string.startIndex.advanced(by: Int(end))]
     }
 
-    @inline(__always) private static func parseUserInfoString(userInfoString: String) -> URI.UserInfo? {
-        let userInfoElements = userInfoString.split(":")
+    @inline(__always) private static func parse(userInfoString: String) -> URI.UserInfo? {
+        let userInfoElements = userInfoString.split(separator: ":")
         if userInfoElements.count == 2 {
             if let
                 username = try? String(percentEncoded: userInfoElements[0]),
@@ -117,11 +121,11 @@ extension URI {
         return nil
     }
 
-    @inline(__always) private static func parseQueryString(queryString: String) -> Query {
+    @inline(__always) private static func parse(queryString: String) -> Query {
         var queries: Query = [:]
-        let queryTuples = queryString.split("&")
+        let queryTuples = queryString.split(separator: "&")
         for tuple in queryTuples {
-            let queryElements = tuple.split("=")
+            let queryElements = tuple.split(separator: "=")
             if queryElements.count == 1 {
                 if let key = try? String(percentEncoded: queryElements[0]) {
                     queries[key] = QueryField([])
@@ -196,9 +200,4 @@ public func ==(lhs: URI, rhs: URI) -> Bool {
 
 public func ==(lhs: URI.UserInfo, rhs: URI.UserInfo) -> Bool {
     return lhs.hashValue == rhs.hashValue
-}
-
-
-public enum URIParseError : ErrorProtocol {
-    case invalidURI
 }
