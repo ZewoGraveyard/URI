@@ -8,7 +8,7 @@ class URITests: XCTestCase {
 }
 
 extension URITests {
-    static var allTests : [(String, URITests -> () throws -> Void)] {
+    static var allTests: [(String, URITests -> () throws -> Void)] {
         return [
            ("testReality", testReality),
         ]
