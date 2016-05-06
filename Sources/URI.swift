@@ -254,10 +254,18 @@ extension URI {
 
 extension String {
     func percentEncoded() throws -> String {
-        guard let encoded = self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed()) else {
+
+        #if os(Linux)
+        let allowedSet = NSCharacterSet.URLQueryAllowedCharacterSet()
+        let encoded = self.stringByAddingPercentEncodingWithAllowedCharacters(allowedSet)
+        #else
+        let allowedSet = NSCharacterSet.urlQueryAllowed()
+        let encoded = self.addingPercentEncoding(withAllowedCharacters: allowedSet)
+        #endif
+        guard let str = encoded else {
             throw URIError.invalidURI
         }
-        return encoded
+        return str
     }
 }
 
