@@ -25,8 +25,9 @@
 import CURIParser
 @_exported import String
 @_exported import C7
+import Foundation
 
-public enum URIParseError : ErrorProtocol {
+public enum URIError : ErrorProtocol {
     case invalidURI
 }
 
@@ -45,7 +46,7 @@ extension URI {
         let u = parse_uri(string)
 
         if u.error == 1 {
-            throw URIParseError.invalidURI
+            throw URIError.invalidURI
         }
 
         if u.field_set & 1 != 0 {
@@ -127,16 +128,16 @@ extension URI {
         var queries: Query = [:]
         let queryTuples = queryString.split(separator: "&")
         for tuple in queryTuples {
-            let queryElements = tuple.split(separator: "=")
+            let queryElements = tuple.split(separator: "=", omittingEmptySubsequences: false)
             if queryElements.count == 1 {
                 if let key = try? String(percentEncoded: queryElements[0]) {
-                    queries[key] = QueryField([])
+                    queries[key] += QueryField(nil)
                 }
             } else if queryElements.count == 2 {
                 if let
                     key = try? String(percentEncoded: queryElements[0]),
                     value = try? String(percentEncoded: queryElements[1]) {
-                        queries[key] = QueryField(value)
+                        queries[key] += QueryField(value)
                 }
             }
         }
@@ -172,12 +173,20 @@ extension URI: CustomStringConvertible {
             string += "?"
         }
 
-        for (offset: index, element: queryElement) in query.enumerated() {
-            string += "\(queryElement.key)"
-            if let value = query[queryElement.key].values[0] {
-                string += "=\(value)"
+        for (offset: queryIndex, element: key) in query.fields.keys.sorted().enumerated() {
+            for (offset: valueIndex, element: value) in query[key].values.enumerated() {
+                string += "\(key)"
+
+                if let value = value {
+                    string += "=\(value)"
+                }
+
+                if valueIndex != query[key].values.count - 1 {
+                    string += "&"
+                }
             }
-            if index != query.count - 1 {
+
+            if queryIndex != query.count - 1 {
                 string += "&"
             }
         }
@@ -188,6 +197,82 @@ extension URI: CustomStringConvertible {
 
         return string
     }
+}
+
+extension URI {
+    public func percentEncoded() throws -> String {
+        var string = ""
+
+        if let scheme = scheme {
+            string += "\(scheme)://"
+        }
+
+        if let userInfo = userInfo {
+            string += "\(userInfo)@"
+        }
+
+        if let host = host {
+            string += "\(host)"
+        }
+
+        if let port = port {
+            string += ":\(port)"
+        }
+
+        if let path = path {
+            string += "\(path)"
+        }
+
+        if query.count > 0 {
+            string += "?"
+        }
+
+        for (offset: queryIndex, element: key) in query.fields.keys.sorted().enumerated() {
+            for (offset: valueIndex, element: value) in query[key].values.enumerated() {
+                string += "\(key)"
+
+                if var value = try value?.percentEncoded() {
+                    value.replace(string: "&", with: "%26")
+                    string += "=\(value)"
+                }
+
+                if valueIndex != query[key].values.count - 1 {
+                    string += "&"
+                }
+            }
+
+            if queryIndex != query.count - 1 {
+                string += "&"
+            }
+        }
+
+        if let fragment = fragment {
+            string += "#\(fragment)"
+        }
+        
+        return string
+    }
+}
+
+extension String {
+    func percentEncoded() throws -> String {
+
+        #if os(Linux)
+        let allowedSet = NSCharacterSet.URLQueryAllowedCharacterSet()
+        let encoded = self.stringByAddingPercentEncodingWithAllowedCharacters(allowedSet)
+        #else
+        let allowedSet = NSCharacterSet.urlQueryAllowed()
+        let encoded = self.addingPercentEncoding(withAllowedCharacters: allowedSet)
+        #endif
+        guard let str = encoded else {
+            throw URIError.invalidURI
+        }
+        return str
+    }
+}
+
+func += (lhs: inout QueryField, rhs: QueryField) {
+    return lhs.values += rhs.values
 }
 
 extension URI: Hashable {
