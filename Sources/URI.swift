@@ -47,7 +47,7 @@ extension URI {
         if u.error == 1 {
             throw URIParseError.invalidURI
         }
-        
+
         if u.field_set & 1 != 0 {
             let string = URI.getSubstring(string, start: u.scheme_start, end: u.scheme_end)
             scheme = try String(percentEncoded: string)
@@ -95,14 +95,16 @@ extension URI {
         } else {
             userInfo = nil
         }
-        
-        if scheme == nil && host == nil && port == nil && path == nil && query.count == 0 && fragment == nil && userInfo == nil {
+
+        if scheme == nil && host == nil && port == nil && path == nil &&
+            query.count == 0 && fragment == nil && userInfo == nil {
             throw URIParseError.invalidURI
         }
     }
 
     @inline(__always) private static func getSubstring(_ string: String, start: UInt16, end: UInt16) -> String {
-        return string[string.startIndex.advanced(by: Int(start)) ..< string.startIndex.advanced(by: Int(end))]
+        return string[string.index(string.startIndex, offsetBy: Int(start)) ..<
+                      string.index(string.startIndex, offsetBy: Int(end))]
     }
 
     @inline(__always) private static func parse(userInfoString: String) -> URI.UserInfo? {
