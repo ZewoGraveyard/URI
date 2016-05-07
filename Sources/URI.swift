@@ -25,7 +25,6 @@
 import CURIParser
 @_exported import String
 @_exported import C7
-import Foundation
 
 public enum URIError : ErrorProtocol {
     case invalidURI
@@ -231,7 +230,7 @@ extension URI {
             for (offset: valueIndex, element: value) in query[key].values.enumerated() {
                 string += "\(key)"
 
-                if var value = try value?.percentEncoded() {
+                if var value = try value?.percentEncoded(allowing: .uriQueryAllowed) {
                     value.replace(string: "&", with: "%26")
                     string += "=\(value)"
                 }
@@ -251,23 +250,6 @@ extension URI {
         }
         
         return string
-    }
-}
-
-extension String {
-    func percentEncoded() throws -> String {
-
-        #if os(Linux)
-        let allowedSet = NSCharacterSet.URLQueryAllowedCharacterSet()
-        let encoded = self.stringByAddingPercentEncodingWithAllowedCharacters(allowedSet)
-        #else
-        let allowedSet = NSCharacterSet.urlQueryAllowed()
-        let encoded = self.addingPercentEncoding(withAllowedCharacters: allowedSet)
-        #endif
-        guard let str = encoded else {
-            throw URIError.invalidURI
-        }
-        return str
     }
 }
 
