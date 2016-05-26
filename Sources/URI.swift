@@ -96,15 +96,13 @@ extension URI {
             userInfo = nil
         }
 
-        if scheme == nil && host == nil && port == nil && path == nil &&
-            query.count == 0 && fragment == nil && userInfo == nil {
+        if scheme == nil && host == nil && port == nil && path == nil && query.count == 0 && fragment == nil && userInfo == nil {
             throw URIError.invalidURI
         }
     }
 
     @inline(__always) private static func getSubstring(_ string: String, start: UInt16, end: UInt16) -> String {
-        return string[string.index(string.startIndex, offsetBy: Int(start)) ..<
-                      string.index(string.startIndex, offsetBy: Int(end))]
+        return string[string.index(string.startIndex, offsetBy: Int(start)) ..< string.index(string.startIndex, offsetBy: Int(end))]
     }
 
     @inline(__always) private static func parse(userInfoString: String) -> URI.UserInfo? {
@@ -123,20 +121,22 @@ extension URI {
         return nil
     }
 
-    @inline(__always) private static func parse(queryString: String) -> Query {
-        var queries: Query = [:]
+    @inline(__always) private static func parse(queryString: String) -> [String: [String?]] {
+        var queries: [String: [String?]] = [:]
         let queryTuples = queryString.split(separator: "&")
         for tuple in queryTuples {
             let queryElements = tuple.split(separator: "=", omittingEmptySubsequences: false)
             if queryElements.count == 1 {
                 if let key = try? String(percentEncoded: queryElements[0]) {
-                    queries[key] += QueryField(nil)
+                    let values = queries[key] ?? []
+                    queries[key] = values + [nil]
                 }
             } else if queryElements.count == 2 {
                 if let
                     key = try? String(percentEncoded: queryElements[0]),
                     value = try? String(percentEncoded: queryElements[1]) {
-                        queries[key] += QueryField(value)
+                    let values = queries[key] ?? []
+                    queries[key] = values + ([value] as [String?])
                 }
             }
         }
@@ -172,15 +172,15 @@ extension URI: CustomStringConvertible {
             string += "?"
         }
 
-        for (offset: queryIndex, element: key) in query.fields.keys.sorted().enumerated() {
-            for (offset: valueIndex, element: value) in query[key].values.enumerated() {
+        for (offset: queryIndex, element: key) in query.keys.sorted().enumerated() {
+            for (offset: valueIndex, element: value) in query[key]!.enumerated() {
                 string += "\(key)"
 
                 if let value = value {
                     string += "=\(value)"
                 }
 
-                if valueIndex != query[key].values.count - 1 {
+                if valueIndex != query[key]!.count - 1 {
                     string += "&"
                 }
             }
@@ -226,16 +226,16 @@ extension URI {
             string += "?"
         }
 
-        for (offset: queryIndex, element: key) in query.fields.keys.sorted().enumerated() {
-            for (offset: valueIndex, element: value) in query[key].values.enumerated() {
+        for (offset: queryIndex, element: key) in query.keys.sorted().enumerated() {
+            for (offset: valueIndex, element: value) in query[key]!.enumerated() {
                 string += "\(key)"
 
-                if var value = try value?.percentEncoded(allowing: .uriQueryAllowed) {
+                if var value = try value?.percentEncoded(allowing: CharacterSet.uriQueryAllowed) {
                     value.replace(string: "&", with: "%26")
                     string += "=\(value)"
                 }
 
-                if valueIndex != query[key].values.count - 1 {
+                if valueIndex != query[key]!.count - 1 {
                     string += "&"
                 }
             }
@@ -248,13 +248,9 @@ extension URI {
         if let fragment = fragment {
             string += "#\(fragment)"
         }
-        
+
         return string
     }
-}
-
-func += (lhs: inout QueryField, rhs: QueryField) {
-    return lhs.values += rhs.values
 }
 
 extension URI: Hashable {
