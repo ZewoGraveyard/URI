@@ -231,9 +231,11 @@ extension URI {
             for (offset: valueIndex, element: value) in query[key]!.enumerated() {
                 string += "\(key)"
 
-                if var value = try value?.percentEncoded() {
-                    value.replace(string: "&", with: "%26")
-                    string += "=\(value)"
+                if let value = value {
+                    if var value = try? String(percentEncoded: value) {
+                        value.replace(string: "&", with: "%26")
+                        string += "=\(value)"
+                    }
                 }
 
                 if valueIndex != query[key]!.count - 1 {
@@ -251,15 +253,6 @@ extension URI {
         }
 
         return string
-    }
-}
-
-extension String {
-    func percentEncoded() throws -> String {
-        guard let encoded = self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed()) else {
-            throw URIError.invalidURI
-        }
-        return encoded
     }
 }
 
