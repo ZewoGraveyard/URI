@@ -25,7 +25,6 @@
 import CURIParser
 @_exported import String
 @_exported import C7
-import Foundation
 
 public enum URIError : ErrorProtocol {
     case invalidURI
@@ -231,11 +230,9 @@ extension URI {
             for (offset: valueIndex, element: value) in query[key]!.enumerated() {
                 string += "\(key)"
 
-                if let value = value {
-                    if var value = try? String(percentEncoded: value) {
-                        value.replace(string: "&", with: "%26")
-                        string += "=\(value)"
-                    }
+                if var value = try value?.percentEncoded(allowing: CharacterSet.uriQueryAllowed) {
+                    value.replace(string: "&", with: "%26")
+                    string += "=\(value)"
                 }
 
                 if valueIndex != query[key]!.count - 1 {
