@@ -3,33 +3,25 @@ import XCTest
 
 class URITests: XCTestCase {
     func testQuery() {
-        let original = URI(
-            path: "/",
-            query: [
-                       "foo": ["bar barão \\!@#$&%$#", "baz \\!@#$&@#$! anêmona"],
-                       "fuu": [""],
-                       "fou": [nil]
-            ]
-        )
 
-        guard let encoded = try? original.percentEncoded() else {
-            XCTFail()
-            return
+        do {
+            let uri = try URI("http://www.example.com:80/dir/subdir?param=1&param=2;param%20=%20#fragment")
+
+            XCTAssertEqual(uri.scheme, "http")
+            XCTAssertEqual(uri.host, "www.example.com")
+            XCTAssertEqual(uri.port, 80)
+            XCTAssertEqual(uri.path, "/dir/subdir")
+            XCTAssertEqual(uri.query, "param=1&param=2;param%20=%20")
+            XCTAssertEqual(uri.fragment, "fragment")
+
+        } catch {
+            XCTFail(String(error))
         }
-
-        XCTAssertEqual(encoded, "/?foo=bar%20bar%C3%A3o%20%5C!@%23$%26%25$%23&foo=baz%20%5C!@%23$%26@%23$!%20an%C3%AAmona&fou&fuu=")
-
-        guard let decoded = try? URI(encoded) else {
-            XCTFail()
-            return
-        }
-
-        XCTAssertEqual(decoded, original)
     }
 }
 
 extension URITests {
-    static var allTests: [(String, URITests -> () throws -> Void)] {
+    static var allTests = {
         return [
            ("testQuery", testQuery),
         ]
