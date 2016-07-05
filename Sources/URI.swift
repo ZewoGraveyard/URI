@@ -76,10 +76,9 @@ extension URI {
         }
 
         if u.field_set & 16 != 0 {
-            let queryString = URI.getSubstring(string, start: u.query_start, end: u.query_end)
-            query = URI.parse(queryString: queryString)
+            query = URI.getSubstring(string, start: u.query_start, end: u.query_end)
         } else {
-            query = [:]
+            query = nil
         }
 
         if u.field_set & 32 != 0 {
@@ -96,7 +95,7 @@ extension URI {
             userInfo = nil
         }
 
-        if scheme == nil && host == nil && port == nil && path == nil && query.count == 0 && fragment == nil && userInfo == nil {
+        if scheme == nil && host == nil && port == nil && path == nil && query == nil && fragment == nil && userInfo == nil {
             throw URIError.invalidURI
         }
     }
@@ -168,26 +167,8 @@ extension URI: CustomStringConvertible {
             string += "\(path)"
         }
 
-        if query.count > 0 {
-            string += "?"
-        }
-
-        for (offset: queryIndex, element: key) in query.keys.sorted().enumerated() {
-            for (offset: valueIndex, element: value) in query[key]!.enumerated() {
-                string += "\(key)"
-
-                if let value = value {
-                    string += "=\(value)"
-                }
-
-                if valueIndex != query[key]!.count - 1 {
-                    string += "&"
-                }
-            }
-
-            if queryIndex != query.count - 1 {
-                string += "&"
-            }
+        if let query = query {
+            string += "\(query)"
         }
 
         if let fragment = fragment {
@@ -222,27 +203,8 @@ extension URI {
             string += "\(path)"
         }
 
-        if query.count > 0 {
-            string += "?"
-        }
-
-        for (offset: queryIndex, element: key) in query.keys.sorted().enumerated() {
-            for (offset: valueIndex, element: value) in query[key]!.enumerated() {
-                string += "\(key)"
-
-                if var value = try value?.percentEncoded(allowing: CharacterSet.uriQueryAllowed) {
-                    value.replace(string: "&", with: "%26")
-                    string += "=\(value)"
-                }
-
-                if valueIndex != query[key]!.count - 1 {
-                    string += "&"
-                }
-            }
-
-            if queryIndex != query.count - 1 {
-                string += "&"
-            }
+        if let query = try query?.percentEncoded(allowing: CharacterSet.uriQueryAllowed) {
+            string += "\(query)"
         }
 
         if let fragment = fragment {
