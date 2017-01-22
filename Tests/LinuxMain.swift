@@ -1,7 +1,7 @@
 #if os(Linux)
 
 import XCTest
-@testable import URITestSuite
+@testable import URITests
 
 XCTMain([
     testCase(URITests.allTests)

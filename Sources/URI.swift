@@ -26,7 +26,7 @@ import CURIParser
 @_exported import String
 @_exported import C7
 
-public enum URIError : ErrorProtocol {
+public enum URIError: Error {
     case invalidURI
 }
 
@@ -95,21 +95,24 @@ extension URI {
             userInfo = nil
         }
 
-        if scheme == nil && host == nil && port == nil && path == nil && query == nil && fragment == nil && userInfo == nil {
-            throw URIError.invalidURI
+        if scheme == nil && host == nil && port == nil && path == nil && query == nil && fragment == nil &&
+            userInfo == nil {
+                throw URIError.invalidURI
         }
     }
 
     @inline(__always) private static func getSubstring(_ string: String, start: UInt16, end: UInt16) -> String {
-        return string[string.index(string.startIndex, offsetBy: Int(start)) ..< string.index(string.startIndex, offsetBy: Int(end))]
+        let from = string.index(string.startIndex, offsetBy: Int(start))
+        let to = string.index(string.startIndex, offsetBy: Int(end))
+        return string[from ..< to]
     }
 
     @inline(__always) private static func parse(userInfoString: String) -> URI.UserInfo? {
         let userInfoElements = userInfoString.split(separator: ":")
         if userInfoElements.count == 2 {
-            if let
-                username = try? String(percentEncoded: userInfoElements[0]),
-                password = try? String(percentEncoded: userInfoElements[1]) {
+            if
+                let username = try? String(percentEncoded: userInfoElements[0]),
+                let password = try? String(percentEncoded: userInfoElements[1]) {
                     return URI.UserInfo(
                         username: username,
                         password: password
@@ -131,9 +134,9 @@ extension URI {
                     queries[key] = values + [nil]
                 }
             } else if queryElements.count == 2 {
-                if let
-                    key = try? String(percentEncoded: queryElements[0]),
-                    value = try? String(percentEncoded: queryElements[1]) {
+                if
+                    let key = try? String(percentEncoded: queryElements[0]),
+                    let value = try? String(percentEncoded: queryElements[1]) {
                     let values = queries[key] ?? []
                     queries[key] = values + ([value] as [String?])
                 }
@@ -205,7 +208,7 @@ extension URI {
 
         if let query = query {
             string += "?"
-            let encoded = try query.percentEncoded(allowing: CharacterSet.uriQueryAllowed)
+            let encoded = query.percentEncoded(allowing: Characters.uriQueryAllowed)
             string += "\(encoded)"
         }
 
@@ -223,10 +226,10 @@ extension URI: Hashable {
     }
 }
 
-public func ==(lhs: URI, rhs: URI) -> Bool {
+public func == (lhs: URI, rhs: URI) -> Bool {
     return lhs.hashValue == rhs.hashValue
 }
 
-public func ==(lhs: URI.UserInfo, rhs: URI.UserInfo) -> Bool {
+public func == (lhs: URI.UserInfo, rhs: URI.UserInfo) -> Bool {
     return lhs.hashValue == rhs.hashValue
 }

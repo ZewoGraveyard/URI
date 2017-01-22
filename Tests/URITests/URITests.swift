@@ -15,15 +15,15 @@ class URITests: XCTestCase {
             XCTAssertEqual(uri.fragment, "fragment")
 
         } catch {
-            XCTFail(String(error))
+            XCTFail(error as! String)
         }
     }
 }
 
 extension URITests {
-    static var allTests: [(String, URITests -> () throws -> Void)] {
+    static var allTests: [(String, (URITests) -> () throws -> Void)] {
         return [
-           ("testQuery", testQuery),
+           ("testQuery", testQuery)
         ]
     }
 }
